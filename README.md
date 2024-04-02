@@ -9,7 +9,7 @@ Temel İşlemler bölümünde yeni Linux / Pardus kullanıcıları kolaylıkla s
 - Dosya yazdır fonksiyonu aktif değil. (Tasarlanma sürecinde)
 
 Geliştirme teklifleri için iletişime geçebilirsiniz. Pardus Form üzerinden de konu açılmıştır.
-Pardus form üzerinden ulaşabilirsiniz.
+Pardus form üzerinden ulaşabilirsiniz. ( https://forum.pardus.org.tr/t/pardus-yardimci/26116 )
 
 ![1](https://github.com/tvardar/pardus-yardimci/assets/44139485/941249a9-90d6-47b9-93ba-5981f87e0287)
 ![2](https://github.com/tvardar/pardus-yardimci/assets/44139485/19eaaa92-a750-4f84-aa9b-990bfa62b675)
