@@ -313,32 +313,53 @@ def seskarti():
 # ------------------------------ #
 
 def ram ():
-    toplamram = (psutil.virtual_memory().total)
-    ui.lblRamtoplam.setText(str(toplamram))
-    kullanilanram = (psutil.virtual_memory().used)
-    ui.lblRamkullanilan.setText(str(kullanilanram))
+    ram = psutil.virtual_memory()
 
+    # Toplam RAM miktarı
+    total_ram = ram.total / (1024 ** 3)  # Byte cinsinden aldığımızı GB'ye çeviriyoruz
+    toplamram = (round(total_ram, 2))
+    ui.lblRamtoplam.setText(str(toplamram)+" GB")
 
+    # Kullanılan RAM miktarı
+    used_ram = ram.used / (1024 ** 3)
+    kullanilanram = (round(used_ram, 2))
+    ui.lblRamkullanilan.setText(str(kullanilanram)+" GB")
+
+    # Boş RAM miktarı
+    free_ram = ram.available / (1024 ** 3)
+    bosram = (round(free_ram, 2))
+    ui.lblRambos.setText(str(bosram)+" GB")
 
 # ---- HDD BİLGİLERİ BÖLÜMÜ ---- #
 # ------------------------------ #
 
 def hdd ():
-    toplamhdd = (psutil.disk_usage('/').total)
-    ui.lblHddtoplam.setText(str(toplamhdd))
-    kullanilanhdd = (psutil.disk_usage('/').used)
-    ui.lblHddkullanilan.setText(str(kullanilanhdd))
+    statvfs = os.statvfs(".")
+
+    # Toplam disk alanı (bayt cinsinden)
+    total_bytes = statvfs.f_blocks * statvfs.f_frsize
+
+    # Kullanılmış disk alanı (bayt cinsinden)
+    used_bytes = statvfs.f_blocks - statvfs.f_bfree
+
+    # Boş disk alanı (bayt cinsinden)
+    free_bytes = statvfs.f_bavail * statvfs.f_frsize
+
+    # Disk kullanım bilgilerini yazdırma
+    hddtoplam = (round(total_bytes / (1024**3),2))
+    ui.lblhdd1toplam.setText(str(hddtoplam) + " GB")
+    hddkullanilan = (round(used_bytes / (1024**2),2))
+    ui.lblhdd1kullan.setText(str(hddkullanilan)+ " GB")
+    hddbos = (round(free_bytes / (1024**3),2))
+    ui.lblhdd1bos.setText(str(hddbos)+ " GB")
 
 
 
 
 
-
-# ***************************************************************** #
-# *** **** *** **** TEMEL İŞLEMLER SEKMESİ BÖLÜMÜ **** *** **** *** #
-# ***************************************************************** #
-
-
+# ************************************************************* #
+# *** **** *** **** TERMİNAL İŞLEMLERİ BÖLÜMÜ **** *** **** *** #
+# ************************************************************* #
 
 
 
@@ -403,102 +424,63 @@ def apt_autoremove():
 ui.btnremove.clicked.connect(apt_autoremove)
 
 
-# ---- PIP KURULUMU (Python Packet İnstaller ) ---- #
-# ------------------------------------------------- #
-def pip_install():
+
+
+
+
+
+# ---- Bozuk Paketleri Düzeltelim --- #
+# ----------------------------------- #
+def paketleri_duzelt():
     masaustu = masaustu_kontrol()
     if masaustu == "xfce":
-        subprocess.run(["xfce4-terminal", "--hold", "-e", "sudo apt-get install pyhton3-pip"])
+        subprocess.run(["xfce4-terminal", "--hold", "-e", "sudo apt update --fix-missing"])
     elif masaustu == "gnome":
-        subprocess.run(["x-terminal-emulator", "-e", "sudo apt-get install pyhton3-pip"])
+        subprocess.run(["x-terminal-emulator", "-e", "sudo apt update --fix-missing"])
     elif masaustu == "kde":
-        subprocess.run(["konsole", "-e", "sudo apt-get install pyhton3-pip"])
+        subprocess.run(["konsole", "-e", "sudo apt update --fix-missing"])
     else:
         print("Bilinmeyen masaüstü ortamı. Terminal açılamadı.")
 
 
-ui.btnpipkur.clicked.connect(pip_install)
+ui.btnpaketduzelt.clicked.connect(paketleri_duzelt)
 
 
 
-
-# ---- PIP GÜNCELLE (Pip Upgrade ) ---- #
-# ------------------------------------------------- #
-def pip_guncelle():
+# ---- Bağımlılıkları Tamamla --- #
+# ------------------------------- #
+def bagimliliklar():
     masaustu = masaustu_kontrol()
     if masaustu == "xfce":
-        subprocess.run(["xfce4-terminal", "--hold", "-e", "sudo pip install --upgrade pip"])
+        subprocess.run(["xfce4-terminal", "--hold", "-e", "sudo apt install -f"])
     elif masaustu == "gnome":
-        subprocess.run(["x-terminal-emulator", "-e", "sudo pip install --upgrade pip"])
+        subprocess.run(["x-terminal-emulator", "-e", "sudo apt install -f"])
     elif masaustu == "kde":
-        subprocess.run(["konsole", "-e", "sudo pip install --upgrade pip"])
+        subprocess.run(["konsole", "-e", "sudo apt install -f"])
     else:
         print("Bilinmeyen masaüstü ortamı. Terminal açılamadı.")
 
 
-ui.btnPipGuncelle.clicked.connect(pip_guncelle)
+ui.btnbagimlilik.clicked.connect(bagimliliklar)
 
 
 
 
-
-# ---- PIP VERSİYON SORUGULAMA (Pip3 --version) --- #
-# ------------------------------------------------- #
-def pip_version():
+# ---- Grub GÜncelle --- #
+# ---------------------- #
+def grub_guncelle():
     masaustu = masaustu_kontrol()
     if masaustu == "xfce":
-        subprocess.run(["xfce4-terminal", "--hold", "-e", "pip3 --version"])
+        subprocess.run(["xfce4-terminal", "--hold", "-e", "sudo update-grub"])
     elif masaustu == "gnome":
-        subprocess.run(["x-terminal-emulator", "-e", "pip3 --version"])
+        subprocess.run(["x-terminal-emulator", "-e", "sudo update-grub"])
     elif masaustu == "kde":
-        subprocess.run(["konsole", "-e", "pip3 --version"])
+        subprocess.run(["konsole", "-e", "sudo update-grub"])
     else:
         print("Bilinmeyen masaüstü ortamı. Terminal açılamadı.")
 
 
-ui.btnpipversion.clicked.connect(pip_version)
-
-
-
-# ---- PYTHON VERSİYON SORUGULAMA (Python3 --version) --- #
-# ------------------------------------------------------- #
-def python_version():
-    masaustu = masaustu_kontrol()
-    if masaustu == "xfce":
-        subprocess.run(["xfce4-terminal", "--hold", "-e", "python3 --version"])
-    elif masaustu == "gnome":
-        subprocess.run(["x-terminal-emulator", "-e", "python3 --version"])
-    elif masaustu == "kde":
-        subprocess.run(["konsole", "-e", "python3 --version"])
-    else:
-        print("Bilinmeyen masaüstü ortamı. Terminal açılamadı.")
-
-
-ui.btnpythonver.clicked.connect(python_version)
-
-
-
-
-
-# ***************************************************************** #
-# *** **** *** **** TEMEL İŞLEMLERİ SEKMESİ BÖLÜMÜ **** *** **** *** #
-# ***************************************************************** #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ui.btngrubguncelle.clicked.connect(grub_guncelle)
 
 
 
@@ -508,9 +490,13 @@ ui.btnpythonver.clicked.connect(python_version)
 # ---------------------------------- #
 def gosterHakkinda():
     msg = QMessageBox()
-    msg.setIcon(QMessageBox.Information)
     msg.setWindowTitle("Hakkında")
-    msg.setText("Tarık VARDAR tarafından hazırlanmıştır.\n tarikvardar@gmail.com\n github.com/tvardar\n")
+    msg.setText("""<font color=\"red\"><center><br><b>Pardus Yardımcı</b></font><br><br><font size=\"2\"><center>Pardus sisteminiz 
+                hakkında bilgi alın ve kolayca yönetin. <br><br><center><a href=\"mailto:tarikvardar@gmail.com\">
+                tarikvardar@gmail.com</a><br><br><center><a href=\"https://www.github.com/tvardar/pardus-yardimci\">
+                web site</a><br><br>&copy; 2024<br><br>Program hiç bir garanti vermez !!<br><br>Lisan için : 
+                <a href=\"https://www.gnu.org/licenses/gpl-3.0.html\"> GNU Genel Kamu Lisansı v3.0</a> ve sonrasına 
+                bakabilirsiniz.</font>""")
     retval = msg.exec_()
 
 
