@@ -141,18 +141,19 @@ else:
 
 # Sifre adinda bir fonksiyon tanımlayıp, Subprocess modulu ile nmcli üzerindeki verileri aliyoruz.
 def wifisifre ():
-    if internet_baglanti():
-        wsifre = subprocess.check_output(['nmcli', 'device', 'wifi', 'show-password'])
-        wsifre = wsifre.decode('utf-8')  # Çıktıyı UTF-8 formatına çevir
+    try:
+        if internet_baglanti():
+            wsifre = subprocess.check_output(['nmcli', 'device', 'wifi', 'show-password'])
+            wsifre = wsifre.decode('utf-8')  # Çıktıyı UTF-8 formatına çevir
 
-        lines = wsifre.split('\n') # Çıktıyı satırlara ayır
+            lines = wsifre.split('\n') # Çıktıyı satırlara ayır
+            # For döngüsü ile verileri geziyoruz ve,
+            for line in lines:
+                # 'Parola' ifadelerini içeren satırı bulup,
+                if 'Parola' in line:
+                    Parola = line.split(':', 1)[1] # : İşaretinden itibaren içerikleri böldük.
+                    password = Parola.strip()  # Boşlukları temizle
 
-        # For döngüsü ile verileri geziyoruz ve,
-        for line in lines:
-            # 'Parola' ifadelerini içeren satırı bulup,
-            if 'Parola' in line:
-                Parola = line.split(':', 1)[1] # : İşaretinden itibaren içerikleri böldük.
-                password = Parola.strip()  # Boşlukları temizle
 
         def gosterwifi():
             if ui.linewifi.echoMode() == QLineEdit.Password:
@@ -162,9 +163,9 @@ def wifisifre ():
                 ui.linewifi.setEchoMode(QLineEdit.Password)
 
         ui.btngoster2.clicked.connect(gosterwifi)
-    else:
-        pass
-
+        return True
+    except requests.ConnectionError:
+        return False
 
 # ---- DAĞITIM BİLGİLERİ BÖLÜMÜ ---- #
 # ---------------------------------- #
@@ -527,5 +528,3 @@ hdd()
 
 
 sys.exit(Uygulama.exec_())
-
-
