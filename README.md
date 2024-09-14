@@ -13,3 +13,14 @@ Pardus form üzerinden ulaşabilirsiniz. ( https://forum.pardus.org.tr/t/pardus-
 ![Ekran Görüntüsü - 2024-04-15 15-48-32](https://github.com/tvardar/pardus-yardimci/assets/44139485/5fe92356-1edd-4b4b-8893-26300a005ddd)
 ![Ekran Görüntüsü - 2024-04-15 15-48-26](https://github.com/tvardar/pardus-yardimci/assets/44139485/ff359ad8-d042-45c6-84a3-b065f6c6c881)
 ![Ekran Görüntüsü - 2024-04-15 15-48-20](https://github.com/tvardar/pardus-yardimci/assets/44139485/4d2cfa19-80a2-4f7f-8832-8179cbc4d4dc)
+
+Gereksinimler :
+pip, pyqt5, request
+
+Kurulum :
+
+sudo apt install python3-pip
+
+pip3 install pyqt5
+
+pip3 install request
