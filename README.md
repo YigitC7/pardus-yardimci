@@ -1,4 +1,4 @@
-# pardus-yardimci
+# pardus Yardimci
 
 Pardus için Sistem bilgileri ve temel terminal komutlarını içeren yardımcı uygulama aracı.
 
