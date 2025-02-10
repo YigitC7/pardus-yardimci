@@ -1,7 +1,6 @@
 <div align="center">
 
 # Pardus Yardımcı
-![Pardus](https://seeklogo.com/images/P/Pardus_OS-logo-0832612391-seeklogo.com.png)
 
 ![Pyton GUI APP](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
 ![QT5 APP](https://img.shields.io/badge/QT-41CD52?logo=qt&logoColor=white&style=for-the-badge)
