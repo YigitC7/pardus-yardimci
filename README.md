@@ -1,4 +1,5 @@
-<div>
+<div align="center">
+  
 # pardus-yardimci
 
 ![Pyton GUI APP](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
