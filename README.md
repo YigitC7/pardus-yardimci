@@ -16,10 +16,8 @@ pip3 install pyqt5
 ```bash
 pip3 install request
 ```
->Bağımlılıklar: pip, pyqt5, request
 
-
-Geliştirme teklifleri için iletişime geçebilirsiniz. Pardus Form üzerinden de konu açılmıştır.
+>Geliştirme teklifleri için iletişime geçebilirsiniz. Pardus Form üzerinden de konu açılmıştır.
 <a href="https://forum.pardus.org.tr/t/pardus-yardimci/26116">Pardus form</a> üzerinden ulaşabilirsiniz.
 
 ![Ekran Görüntüsü - 2024-04-15 15-48-48](https://github.com/tvardar/pardus-yardimci/assets/44139485/e1e9541c-aa4a-4abe-bdfb-89d4550fca46)
