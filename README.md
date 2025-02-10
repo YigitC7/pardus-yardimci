@@ -14,7 +14,8 @@ Temel sistem bilgilerinizi, Ağ ve İnternet bağlantı bilgilerinizi, Donanım 
 
 Temel İşlemler bölümünde yeni Linux / Pardus kullanıcıları kolaylıkla sistem güncelleme, bağımlılıkları temizleme gibi temel işlemleri tek tık ile yapabilecekler.  
 
-## Kurulum :
+## Çalıştırmak :
+### Gerekli paketler:
 ```bash
 sudo apt install python3-pip
 ```
@@ -23,6 +24,16 @@ pip3 install pyqt5
 ```
 ```bash
 pip3 install request
+```
+### İndir ve çalıştırmak:
+```bash
+git clone github.com/tvardar/pardus-yardimci
+```
+```bash
+cd pardus-yardimci
+```
+```bash
+python3 Main.py
 ```
 
 >Geliştirme teklifleri için iletişime geçebilirsiniz. Pardus Form üzerinden de konu açılmıştır.
